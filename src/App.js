@@ -12,7 +12,7 @@ function App() {
   const [location, setLocation] = useState('Athens');
   const [weatherIcon, setWeatherIcon] = useState(clear_icon);
 
-  const api = "ed5fa1c48313ee8620651f47dbcdf383";
+  const api = process.env.REACT_APP_API_KEY;
   
   const searchLocation = async () => { 
     const inputElement = document.querySelector(".input");
@@ -46,7 +46,7 @@ function App() {
       console.error('Error fetching weather data:', error);
     }
   };
-  
+
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       searchLocation();
