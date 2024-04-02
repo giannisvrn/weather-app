@@ -8,9 +8,11 @@ import rain_icon from "./icons/rain.png";
 import snow_icon from "./icons/snow.png";
 
 function App() {
-  const [temperature, setTemperature] = useState('20°C');
-  const [location, setLocation] = useState('Athens');
+  const [temperature, setTemperature] = useState('0°C');
+  const [location, setLocation] = useState('-');
   const [weatherIcon, setWeatherIcon] = useState(clear_icon);
+  const [humidity, setHumidity] = useState('0');
+  const [wind, setWind] = useState('0');
 
   const api = process.env.REACT_APP_API_KEY;
   
@@ -28,6 +30,8 @@ function App() {
       const roundTemp = Math.floor(data.main.temp)
       setTemperature(`${roundTemp}°C`);
       setLocation(data.name);
+      setHumidity(`${data.main.humidity}%`);
+      setWind(`${data.wind.speed} km/h`);
 
       const w_icon = data.weather[0].icon.match(/\d+/)[0]; // extract only the number part 
       if(w_icon === "01")
@@ -66,6 +70,16 @@ function App() {
         </div>
         <div className='temp'>{temperature}</div>
         <div className='location-class'>{location}</div>
+        <div className='data-container'>
+          <div className='data-class'>
+            <div>{humidity}</div>
+            <div>Humidity</div>
+          </div>
+          <div className='data-class'>
+            <div>{wind}</div>
+            <div>Wind speed</div>
+          </div>
+        </div>
       </div>
     </div>
   );
