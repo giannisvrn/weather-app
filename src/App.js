@@ -13,6 +13,14 @@ function App() {
   const [weatherIcon, setWeatherIcon] = useState(clear_icon);
   const [humidity, setHumidity] = useState('0');
   const [wind, setWind] = useState('0');
+  const currentDate = new Date();
+
+  const options = {
+    weekday: 'long',
+    month: 'long', 
+    day: 'numeric'
+  };
+  const formattedDate = currentDate.toLocaleDateString('en-GR', options);
 
   const api = process.env.REACT_APP_API_KEY;
   
@@ -64,7 +72,7 @@ function App() {
           <input className="input" name="text" type="text" placeholder="Search the internet..." onKeyDown={handleKeyPress}/>
           <img className='search-icon' src={search_icon} alt='' onClick={() => {searchLocation()}}></img>
         </div>
-        <div className='date'>Tuesday,April 2</div>
+        <div className='date'>{formattedDate}</div>
         <div className='weather'>
           <img src={weatherIcon} alt='weather-img'></img>
         </div>
